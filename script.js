@@ -1,6 +1,6 @@
 // Sample product data
 const products = [
-  { id: 1, name: "T-Shirt", price: 5000, img: "tshirt.jpg" },
+  { id: 1, name: "T-Shirt", price: 5000, img: "copilot_image_1731973074719.jpeg" },
   { id: 2, name: "Hoodie", price: 10000, img: "hoodie.jpg" },
   { id: 3, name: "Cap", price: 3000, img: "cap.jpg" },
 ];
