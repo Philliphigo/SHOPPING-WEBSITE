@@ -24,30 +24,42 @@ ul {
 header {
     background-color: #004aad;
     color: white;
-    padding: 15px 20px;
+    padding: 5px 10px; /* Reduced padding for smaller buttons */
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
 header .logo h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Adjusted for smaller buttons */
+    margin: 0;
+}
+
+header .ndife-malawi {
+    font-size: 1.2rem; /* Smaller text for 'Ndife a Malawi' */
+    font-weight: bold;
 }
 
 header nav ul {
     display: flex;
-    gap: 20px;
+    gap: 0.9px; /* Reduced gap between buttons */
 }
 
 header nav ul li a {
     color: white;
     font-weight: bold;
-    font-size: 1rem;
-    padding: 8px 15px;
+    font-size: 0.9rem; /* Smaller font for buttons */
+    padding: 5px 2px; /* Smaller padding */
     transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
 }
