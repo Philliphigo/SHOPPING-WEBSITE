@@ -102,22 +102,70 @@ function checkout() {
         </select>
       </div>
       <h3>Total: MK ${total.toLocaleString()}</h3>
+      <div>
+        <label for="password">Enter 4-Digit Password for Payment:</label>
+        <input type="password" id="password" required>
+      </div>
       <button type="submit">Submit Order</button>
     </form>
   `;
 }
 
-// Submit order
+// Submit order with payment confirmation
 function submitOrder(event) {
   event.preventDefault();
   const name = document.querySelector("#name").value;
   const phone = document.querySelector("#phone").value;
   const payment = document.querySelector("#payment").value;
+  const password = document.querySelector("#password").value;
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  alert(`Thank you, ${name}! Your order has been placed. We will contact you on ${phone}. Payment Method: ${payment}.`);
-  
-  // Clear cart and reset page
-  cart = [];
-  updateCartDisplay();
-  document.querySelector(".checkout").innerHTML = "<h2>Thank you for shopping with us!</h2>";
+  // Simulate payment confirmation
+  const walletBalance = 20000; // Example balance
+  const paymentAmount = total;
+
+  if (walletBalance < paymentAmount) {
+    alert("Insufficient funds. Please add money to your wallet.");
+    return;
+  }
+
+  if (payment === "Airtel Money" || payment === "TNM Mpamba") {
+    alert(`Thank you, ${name}! Your order of MK ${paymentAmount} has been successfully placed. We will contact you at ${phone}. Payment Method: ${payment}`);
+    
+    // Optionally, send order confirmation email via a service like Formspree
+    sendConfirmationEmail(name, phone, payment, total);
+
+    // Clear cart and reset page
+    cart = [];
+    updateCartDisplay();
+    document.querySelector(".checkout").innerHTML = "<h2>Thank you for shopping with us!</h2>";
+  }
+}
+
+// Simulate sending confirmation email (this requires a service like Formspree)
+function sendConfirmationEmail(name, phone, payment, total) {
+  const orderDetails = {
+    name,
+    phone,
+    payment,
+    total
+  };
+
+  // Example Formspree API usage (replace URL with your Formspree URL)
+  fetch("https://formspree.io/f/{your-form-id}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderDetails)
+  })
+  .then(response => response.json())
+  .then(data => console.log("Order confirmation sent", data))
+  .catch(error => console.error("Error sending confirmation:", error));
+}
+
+// Google Login functionality (using Firebase Authentication or Google OAuth)
+function googleLogin() {
+  // You'll need Firebase or OAuth setup for a working Google login
+  alert("Google login is not yet integrated. Please use another authentication method.");
 }
