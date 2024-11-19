@@ -3,7 +3,7 @@ const products = [
   { id: 1, name: "T-Shirt", price: 10000, img: "copilot_image_1731973074719.jpeg" },
   { id: 2, name: "Hoodie", price: 20000, img: "copilot_image_1731973222276.jpeg" },
   { id: 3, name: "Cap", price: 30000, img: "copilot_image_1731973176064.jpeg" },
-  { id: 1, name: "Longsleeves", price: 50000, img: "copilot_image_1731973074719.jpeg" },
+  { id: 1, name: "Longsleeves", price: 50000, img: "copilot_image_1731974059114.jpeg" },
 ];
 
 // Cart array
