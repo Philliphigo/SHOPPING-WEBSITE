@@ -1,172 +1,126 @@
-// Sample product data
-const products = [
-  { id: 1, name: "T-Shirt", price: 10000, img: "copilot_image_1731973074719.jpeg" },
-  { id: 2, name: "Hoodie", price: 20000, img: "copilot_image_1731973222276.jpeg" },
-  { id: 3, name: "Cap", price: 30000, img: "copilot_image_1731973176064.jpeg" },
-  { id: 1, name: "Longsleeves", price: 50000, img: "copilot_image_1731974059114.jpeg" },
-];
-
-// Cart array
-let cart = [];
-
-// Add event listeners after DOM loads
-document.addEventListener("DOMContentLoaded", () => {
-  displayProducts();
-  updateCartDisplay();
-});
-
-// Display products dynamically
-function displayProducts() {
-  const productGrid = document.querySelector(".product-grid");
-  productGrid.innerHTML = products
-    .map(
-      (product) => `
-    <div class="product">
-      <img src="${product.img}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>MK ${product.price.toLocaleString()}</p>
-      <button onclick="addToCart(${product.id})">Add to Cart</button>
-    </div>
-  `
-    )
-    .join("");
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready);
+} else {
+    ready();
 }
 
-// Add product to the cart
-function addToCart(productId) {
-  const product = products.find((p) => p.id === productId);
-  const existingProduct = cart.find((item) => item.id === productId);
-
-  if (existingProduct) {
-    existingProduct.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-  updateCartDisplay();
-}
-
-// Update cart display
-function updateCartDisplay() {
-  const cartSection = document.querySelector(".cart");
-  const cartItems = cart
-    .map(
-      (item) => `
-    <div class="cart-item">
-      <p>${item.name} x ${item.quantity} - MK ${(item.price * item.quantity).toLocaleString()}</p>
-      <button onclick="removeFromCart(${item.id})">Remove</button>
-    </div>
-  `
-    )
-    .join("");
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  cartSection.innerHTML = `
-    <h2>Your Cart</h2>
-    ${cartItems || "<p>Your cart is empty.</p>"}
-    <h3>Total: MK ${total.toLocaleString()}</h3>
-    ${
-      cart.length > 0
-        ? '<button onclick="checkout()">Proceed to Checkout</button>'
-        : ""
+function ready() {
+    let removeItemFromCart = document.getElementsByClassName('btn-danger');
+    for (let i = 0; i < removeItemFromCart.length; i++) {
+        let button = removeItemFromCart[i];
+        button.addEventListener('click', removeCartItem);
     }
-  `;
+
+    let quantityInputs = document.getElementsByClassName('cart-quantity-input');
+    for (let i = 0; i < quantityInputs.length; i++) {
+        let input = quantityInputs[i];
+        input.addEventListener('change', quantityChanged);
+    }
+
+    let addToCartButtons = document.getElementsByClassName('shop-item-button');
+    for (let i = 0; i < addToCartButtons.length; i++) {
+        let button = addToCartButtons[i];
+        button.addEventListener('click', addToCartClicked); // Corrected here
+    }
+
+    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked);
+    window.addEventListener("scroll", reveal);
+};
+
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } else {
+            reveals[i].classList.remove("active");
+        }
+    }
 }
 
-// Remove item from cart
-function removeFromCart(productId) {
-  cart = cart.filter((item) => item.id !== productId);
-  updateCartDisplay();
+function purchaseClicked() {
+    alert('Thank you for your purchase!');
+    let cartItems = document.getElementsByClassName('cart-items')[0];
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild);
+    }
+    updateCartTotal();
 }
 
-// Checkout process
-function checkout() {
-  const checkoutSection = document.querySelector(".checkout");
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  checkoutSection.innerHTML = `
-    <h2>Checkout</h2>
-    <form onsubmit="submitOrder(event)">
-      <div>
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" required>
-      </div>
-      <div>
-        <label for="phone">Phone Number:</label>
-        <input type="text" id="phone" required>
-      </div>
-      <div>
-        <label for="payment">Payment Method:</label>
-        <select id="payment" required>
-          <option value="TNM Mpamba">TNM Mpamba</option>
-          <option value="Airtel Money">Airtel Money</option>
-        </select>
-      </div>
-      <h3>Total: MK ${total.toLocaleString()}</h3>
-      <div>
-        <label for="password">Enter 4-Digit Password for Payment:</label>
-        <input type="password" id="password" required>
-      </div>
-      <button type="submit">Submit Order</button>
-    </form>
-  `;
+function removeCartItem(event) {
+    let buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    updateCartTotal();
 }
 
-// Submit order with payment confirmation
-function submitOrder(event) {
-  event.preventDefault();
-  const name = document.querySelector("#name").value;
-  const phone = document.querySelector("#phone").value;
-  const payment = document.querySelector("#payment").value;
-  const password = document.querySelector("#password").value;
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  // Simulate payment confirmation
-  const walletBalance = 20000; // Example balance
-  const paymentAmount = total;
-
-  if (walletBalance < paymentAmount) {
-    alert("Insufficient funds. Please add money to your wallet.");
-    return;
-  }
-
-  if (payment === "Airtel Money" || payment === "TNM Mpamba") {
-    alert(`Thank you, ${name}! Your order of MK ${paymentAmount} has been successfully placed. We will contact you at ${phone}. Payment Method: ${payment}`);
-    
-    // Optionally, send order confirmation email via a service like Formspree
-    sendConfirmationEmail(name, phone, payment, total);
-
-    // Clear cart and reset page
-    cart = [];
-    updateCartDisplay();
-    document.querySelector(".checkout").innerHTML = "<h2>Thank you for shopping with us!</h2>";
-  }
+function quantityChanged(event) {
+    let input = event.target;
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1;
+    }
+    updateCartTotal();
 }
 
-// Simulate sending confirmation email (this requires a service like Formspree)
-function sendConfirmationEmail(name, phone, payment, total) {
-  const orderDetails = {
-    name,
-    phone,
-    payment,
-    total
-  };
+function addToCartClicked(event) {
+    let button = event.target;
+    let shopItem = button.parentElement.parentElement;
+    let title = shopItem.getElementsByClassName('shop-item-title')[0].innerText;
+    let price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
+    let imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src;
 
-  // Example Formspree API usage (replace URL with your Formspree URL)
-  fetch("https://formspree.io/f/{your-form-id}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(orderDetails)
-  })
-  .then(response => response.json())
-  .then(data => console.log("Order confirmation sent", data))
-  .catch(error => console.error("Error sending confirmation:", error));
+    addItemToCart(title, price, imageSrc);
+    updateCartTotal();
 }
 
-// Google Login functionality (using Firebase Authentication or Google OAuth)
-function googleLogin() {
-  // You'll need Firebase or OAuth setup for a working Google login
-  alert("Google login is not yet integrated. Please use another authentication method.");
+function addItemToCart(title, price, imageSrc) {
+    let cartRow = document.createElement('div');
+    cartRow.classList.add('cart-row');
+
+    let cartItemNames = document.getElementsByClassName('cart-item-title');
+    for (let i = 0; i < cartItemNames.length; i++) {
+        if (cartItemNames[i].innerText == title) {
+            alert('This item is already added to your cart');
+            return; // exits out of the function
+        }
+    }
+
+    let cartRowContents = `
+    <div class="cart-item cart-column">
+        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+        <span class="cart-item-title">${title}</span>
+    </div>
+    <span class="cart-price cart-column">${price}</span>
+    <div class="cart-quantity cart-column">
+        <input class="cart-quantity-input" type="number" value="1">
+        <button class="btn btn-danger" type="button">REMOVE</button>
+    </div>
+    `;
+
+    cartRow.innerHTML = cartRowContents;
+    let cartItems = document.getElementsByClassName('cart-items')[0];
+    cartItems.append(cartRow);
+
+    cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem);
+    cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged);
+}
+
+function updateCartTotal() {
+    let cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    let cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    let total = 0;
+
+    for (let i = 0; i < cartRows.length; i++) {
+        let cartRow = cartRows[i];
+        let priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        let quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        let price = parseFloat(priceElement.innerText.replace('$', ''));
+        let quantity = quantityElement.value;
+        total = total + (price * quantity);
+    }
+
+    total = Math.round(total * 100) / 100;
+    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total;
 }
