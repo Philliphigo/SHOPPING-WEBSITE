@@ -2,161 +2,322 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NDIFE A MALAWI Merch</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>NDIFE A MALAWI | Store</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="js/cart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .main-header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .main-header .band-name {
+            font-size: 2em;
+        }
+
+        /* Toggle Menu */
+        .toggle-menu {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            display: inline-block;
+        }
+
+        .toggle-menu-content {
+            display: none;
+            background-color: #333;
+            color: white;
+            position: absolute;
+            right: 20;
+            top: 30px;
+            width: 150px;
+            border-radius: 5px;
+        }
+
+        .toggle-menu-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .toggle-menu-content a:hover {
+            background-color: #555;
+        }
+
+        .toggle-menu:hover .toggle-menu-content {
+            display: block;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .cart-info {
+            display: none;
+            background-color: #fff;
+            position: fixed;
+            top: 50px;
+            right: 20px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .cart-info.show {
+            display: block;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #555;
+        }
+
+        .footer-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-nav li {
+            display: inline;
+        }
+
+        .footer-nav li a {
+            text-decoration: none;
+        }
+
+        .footer-nav img {
+            width: 30px;
+        }
+
+        /* Responsive Layout */
+        @media screen and (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-    <div class="logo">
-        <img src="path_to_logo.png" alt="Logo">
-    </div>
-    </header>
-        <nav>
+    <header class="main-header">
+        <nav class="main-nav nav">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#shop">Shop</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#login" id="login-link">Login</a></li>
+                <li><a href="about.html">shop with us and get discounts and good deals</a></li>
             </ul>
         </nav>
+        <h1 class="band-name">NDIFE A MALAWI</h1>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h2>Welcome to NDIFE A MALAWI Merch</h2>
-        <p>Discover high-quality products that celebrate Malawi's culture and heritage.</p>
-        <a href="#shop" class="btn">Shop Now</a>
-    </section>
+    <!-- Toggle Menu -->
+    <div class="toggle-menu" id="toggleMenu">
+        Menu
+        <div class="toggle-menu-content">
+            <a href="#featured-products">Products</a>
+            <a href="#about-us">About Us</a>
+            <a href="#contact-us">Contact Us</a>
+        </div>
+    </div>
 
-    <!-- Login/Signup Section -->
-    <section id="login" class="login" style="display: none;">
-        <h2>Login or Sign Up</h2>
-        <form action="https://formspree.io/f/moqbgvkp" method="POST">
-            <div>
-                <button class="google-login" type="button" onclick="googleLogin()">Login with Google</button>
-            </div>
-            <p>Or</p>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login / Sign Up</button>
-        </form>
-    </section>
+    <!-- Cart Icon -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
 
-    <!-- Featured Products -->
-    <section id="shop" class="products">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <!-- Add your product images here -->
-            <div class="product">
-                <img src="product-placeholder.jpg" alt="Product 1">
-                <p>Product name</p>
-                <p>Price</p>
+    <!-- Cart Info -->
+    <div class="cart-info" id="cartInfo">
+        <h3>Cart</h3>
+        <div id="cartItemsList"></div>
+        <div class="total">
+            <strong>Total:</strong> <span id="cartTotal">MWK 0</span>
+        </div>
+        <button id="checkoutButton" onclick="checkout()">Checkout</button>
+    </div>
+
+    <!-- Featured Products Section -->
+    <section id="featured-products" class="featured-products">
+        <h2 class="section-header">Featured Products</h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="path_to_image/t-shirt.jpg" alt="T-Shirt" style="width: 100%; height: auto;">
+                <h3 class="product-name">T-Shirt</h3>
+                <p class="product-price">MWK 20,000</p>
+                <button class="btn-primary" onclick="addToCart('T-Shirt', 20000)">Add to Cart</button>
             </div>
-            <div class="product">
-                <img src="product-placeholder.jpg" alt="Product 2">
-                <p>Product Name</p>
-                <p>Price</p>
+            <div class="product-card">
+                <img src="path_to_image/hoodie.jpg" alt="Hoodie" style="width: 100%; height: auto;">
+                <h3 class="product-name">Hoodie</h3>
+                <p class="product-price">MWK 30,000</p>
+                <button class="btn-primary" onclick="addToCart('Hoodie', 30000)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="path_to_image/long_sleeve.jpg" alt="Long Sleeved" style="width: 100%; height: auto;">
+                <h3 class="product-name">Long Sleeved</h3>
+                <p class="product-price">MWK 25,000</p>
+                <button class="btn-primary" onclick="addToCart('Long Sleeved', 25000)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="path_to_image/cap.jpg" alt="Cap" style="width: 100%; height: auto;">
+                <h3 class="product-name">Cap</h3>
+                <p class="product-price">MWK 40,000</p>
+                <button class="btn-primary" onclick="addToCart('Cap', 40000)">Add to Cart</button>
             </div>
         </div>
     </section>
 
     <!-- Cart Section -->
-    <section id="cart" class="cart">
-        <h2>Your Cart</h2>
-        <div class="cart-items">
-            <p>Your cart is currently empty.</p>
-            <button>Continue Shopping</button>
+    <section class="container content-section">
+        <h2 class="section-header">CART</h2>
+        <div class="cart-row">
+            <span class="cart-item cart-header cart-column">ITEM</span>
+            <span class="cart-price cart-header cart-column">PRICE</span>
+            <span class="cart-quantity cart-header cart-column">QUANTITY</span>
         </div>
-    </section>
-
-    <!-- Checkout Section -->
-    <section id="checkout" class="checkout">
-        <h2>Checkout</h2>
-        <form action="https://formspree.io/f/xjkvowzz" method="POST">
-            <div>
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required>
-            </div>
-            <div>
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
-            </div>
-            <div>
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" name="phone" required>
-            </div>
-            <div>
-                <label for="payment">Payment Method:</label>
-                <select id="payment" name="payment" required>
-                    <option value="tnm">TNM Mpamba</option>
-                    <option value="airtel">Airtel Money</option>
-                </select>
-            </div>
-            <button type="submit">Place Order</button>
-        </form>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>NDIFE A MALAWI is dedicated to showcasing Malawian culture through high-quality merchandise. From clothing to accessories, we aim to celebrate our heritage.</p>
-    </section>
-
-    <!-- Contact Us Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <form action="https://formspree.io/f/xjkvowzz" method="POST">
-            <div>
-                <label for="contact-name">Name:</label>
-                <input type="text" id="contact-name" name="name" required>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="message">Describe your order:</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 NDIFE A MALAWI. All rights reserved.</p>
-        <div class="social-links">
-            <a href="https://facebook.com">Facebook</a>
-            <a href="https://instagram.com">Instagram</a>
-            <a href="https://twitter.com">Twitter</a>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
         </div>
-    </footer>
+        <div class="cart-total">
+            <strong class="cart-total-title">Total</strong>
+            <span class="cart-total-price" id="cartTotalPrice">MWK 0</span>
+        </div>
+        <button class="btn btn-primary btn-purchase" id="purchaseButton" type="button" onclick="purchaseItems()">PURCHASE</button>
+    </section>
 
-    <script src="script.js"></script>
-    <script>
-        // Google login function placeholder
-        function googleLogin() {
-            alert("Google Login functionality will be added here.");
-        }
+    <footer class="main-footer">
+        <div class="container main-footer-container">
+           <h3 class="band-name">TONSE NDIFE A MALAWI<span><small>&copy;</small></span></h3>
+        <ul class="nav footer-nav">
+            <li><a href="https://www.youtube.com" target="_blank"><img src="Images/YouTube Logo.png" alt="YouTube Logo"></a></li>
+            <li><a href="https://www.spotify.com" target="_blank"><img src="Images/Spotify Logo.png" alt="Spotify Logo"></a></li>
+            <li><a href="https://www.facebook.com" target="_blank"><img src="Images/Facebook Logo.png" alt="Facebook Logo"></a></li>
+        </ul>
+    </div>
+</footer>
 
-        // Show login section when login is clicked
-        document.getElementById("login-link").addEventListener("click", function() {
-            const loginSection = document.getElementById("login");
-            loginSection.style.display = "block";
+<script>
+    // Add to Cart functionality
+    let cart = [];
+    let cartCount = document.getElementById("cartCount");
+    let cartInfo = document.getElementById("cartInfo");
+    let cartTotal = document.getElementById("cartTotal");
+    let cartItemsList = document.getElementById("cartItemsList");
+
+    function addToCart(item, price) {
+        cart.push({ item, price });
+        updateCart();
+    }
+
+    function updateCart() {
+        cartCount.textContent = cart.length;
+        let total = cart.reduce((acc, cur) => acc + cur.price, 0);
+        cartTotal.textContent = `MWK ${total}`;
+
+        // Display cart items
+        cartItemsList.innerHTML = '';
+        cart.forEach(cartItem => {
+            let itemDiv = document.createElement("div");
+            itemDiv.textContent = `${cartItem.item}: MWK ${cartItem.price}`;
+            cartItemsList.appendChild(itemDiv);
         });
-    </script>
+    }
+
+    // Toggle cart info visibility
+    cartIcon.addEventListener("click", () => {
+        cartInfo.classList.toggle("show");
+    });
+
+    // Checkout button functionality
+    const checkoutButton = document.getElementById("checkoutButton");
+    checkoutButton.addEventListener("click", function() {
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add items to the cart.");
+        } else {
+            alert("Proceeding to checkout...");
+            // Add your checkout process here
+        }
+    });
+
+    // Purchase functionality
+    const purchaseButton = document.getElementById("purchaseButton");
+    purchaseButton.addEventListener("click", function() {
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add items to the cart.");
+        } else {
+            alert("Thank you for your purchase!");
+            cart = []; // Clear cart after purchase
+            updateCart();
+        }
+    });
+</script>
 </body>
 </html>
